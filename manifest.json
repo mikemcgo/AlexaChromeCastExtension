@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "Active Tab Tracker",
+  "description": "This extension shows a Google Image search result for the current page",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Active Tab Tracker"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://127.0.0.1:5000/"
+  ]
+}
