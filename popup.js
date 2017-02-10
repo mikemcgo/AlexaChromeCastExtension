@@ -9,39 +9,42 @@
  *   is found.
  */
 function getCurrentTabUrl(callback) {
-  // Query filter to be passed to chrome.tabs.query - see
-  // https://developer.chrome.com/extensions/tabs#method-query
-  var queryInfo = {
-    url: 'https://www.twitch.tv/*',
-  };
+	// Query filter to be passed to chrome.tabs.query - see
+	// https://developer.chrome.com/extensions/tabs#method-query
+	var queryInfo = {
+		url: 'https://www.twitch.tv/*',
+	};
 
-  chrome.tabs.query(queryInfo, function(tabs) {
-    var tab = tabs[0];
+	chrome.tabs.query(queryInfo, function(tabs) {
+		var tab = tabs[0];
 
-    var url = tab.url;
-    console.assert(typeof url == 'string', 'tab.url should be a string');
+		var url = tab.url;
+		console.assert(typeof url == 'string', 'tab.url should be a string');
 
-    callback(url);
-  });
+		callback(url);
+	});
 }
 
-function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
+function renderDoc(statusText) {
+	document.getElementById('status').textContent = statusText;
+	chrome.storage.local.get('machineName', function(result) {
+		document.getElementById('showMachineName').textContent = "Computer Name: " + result.machineName;
+	});
+}
+
+function saveName() {
+	var computerName = document.getElementById('machineName').value;
+	chrome.storage.local.set({'machineName': computerName}, function() {
+		// Notify that we saved.
+		console.log(computerName + "saved")
+	});
+	document.getElementById('showMachineName').textContent = "Computer Name: " + computerName
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  getCurrentTabUrl(function(url) {
-    // Put the image URL in Google search.
-    renderStatus('Performing Google Image search for ' + url);
-
-    document.getElementById('status').textContent = url;
-
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-    };
-    xmlHttp.open("POST", "http://192.168.1.45:5000/url?=" + url, true); // true for asynchronous 
-    xmlHttp.send(null);
-  });
+	document.getElementById("nameSubmit").addEventListener("click", saveName);
+	getCurrentTabUrl(function(url) {
+		// Put the image URL in Google search.
+		renderDoc('Finding ' + url);
+	});
 });

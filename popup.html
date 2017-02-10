@@ -27,13 +27,14 @@
 		-
 		- [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
 		-->
+		<script src=jquery.min.js></script>
 		<script src="popup.js"></script>
 	</head>
 	<body>
+		<p id="showMachineName"></p>
 		<p id="status"></p>
-		<form name="machineForm">
-			<input id=machine_name type="text" label="Computer Name">
-			<input id=login_submit value="Save" type="submit">
+		<input id=machineName type="text" label="Computer Name">
+		<button id=nameSubmit>Save</button>
 		</form>
 	</body>
 </html>
