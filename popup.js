@@ -7,12 +7,18 @@ function renderDoc() {
 	});
 }
 
-function save(key, outputElement, printString) {
-	var value = document.getElementById(key).value;
-	chrome.storage.local.set({key: value}, function() {
+function save(keyName, outputElement, printString) {
+	console.log(keyName)
+	var tmpObj = {};
+	tmpObj[keyName] = document.getElementById(keyName).value;
+	chrome.storage.local.set(tmpObj, function() {
 		// Notify that we saved.
-		document.getElementById(outputElement).textContent = printString + value
+		document.getElementById(outputElement).textContent = printString + tmpObj[keyName]
+		chrome.storage.local.get(function(result) {
+			console.log(result)
+		})
 	});
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {

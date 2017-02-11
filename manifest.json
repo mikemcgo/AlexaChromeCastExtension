@@ -5,7 +5,7 @@
   "description": "This extension shows a Google Image search result for the current page",
   "version": "1.0",
   "background": {
-    "scripts": ["eventPage.js", "jquery.min.js"],
+    "scripts": ["eventPage.js"],
     "persistent": false
   },
 
@@ -14,10 +14,6 @@
     "default_popup": "popup.html",
     "default_title": "Active Tab Tracker"
   },
-  "content_scripts": [ {
-    "js": [ "jquery.min.js" ],
-    "matches": [ "http://*/*", "https://*/*"]
-  }],
   "permissions": [
     "tabs",
     "activeTab",
