@@ -19,7 +19,7 @@ chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab) {
 			chrome.storage.local.set({serviceFound: content});
 			// Transmit to server
 			chrome.storage.local.get(function(result) {
-				var uRL = "http://" + result.targetIP + ":5000/reporter/" + result.machineName;
+				var uRL = "http://" + result.targetIP + ":5000/v1/reporter/" + result.machineName;
 				console.log(uRL);
 
 				var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
