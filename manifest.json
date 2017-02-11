@@ -5,7 +5,7 @@
   "description": "This extension shows a Google Image search result for the current page",
   "version": "1.0",
   "background": {
-    "scripts": ["eventPage.js"],
+    "scripts": ["eventPage.js", "jquery.min.js"],
     "persistent": false
   },
 
@@ -22,6 +22,6 @@
     "tabs",
     "activeTab",
     "storage",
-    "http://127.0.0.1:5000/"
+    "http://*/*"
   ]
 }
